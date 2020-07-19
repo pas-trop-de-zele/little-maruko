@@ -1,0 +1,23 @@
+{
+  "name": "little-maruko",
+  "version": "1.0.0",
+  "description": "Web app for Iker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pas-trop-de-zele/Little-Maruko.git"
+  },
+  "author": "Pablo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pas-trop-de-zele/Little-Maruko/issues"
+  },
+  "homepage": "https://github.com/pas-trop-de-zele/Little-Maruko#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  }
+}
