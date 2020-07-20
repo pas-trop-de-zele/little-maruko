@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 // Set up mongoose connection
-mongoose.connect("mongodb://127.0.0.1:27017/LittleMaruko", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/LittleMaruko", { useNewUrlParser: true, useUnifiedTopology: true});
 
 // port to run server on
 const PORT = 3000
@@ -15,23 +15,46 @@ app.use(express.static('public'));
 // Define TeaSchema
 const TeaSchema = new mongoose.Schema({
     name: String,
-    description: String,
     price: Number
 });
 
 // Compile TeaSchema to make model
 const Tea = mongoose.model('Tea', TeaSchema);
 
-// ==================TEST DATA======================
-Tea.create({
-    name: 'Matcha',
-    description: 'Inovative drink',
-    price: 7
-}, (err, new_instance) => {
-    if(err){
+// ==================SEEDING DATA======================
+let seeds = [
+    {
+        name: 'Original Thai Milk Tea',
+        price: 4
+    },
+    {
+        name: 'Green Thai Milk Tea',
+        price: 4
+    },
+    {
+        name: 'Golden Milk Tea',
+        price: 4
+    },
+]
+
+// Delete all existing data
+Tea.deleteMany({}, (err, deleted_data) => {
+    if (err){
         console.log(err)
-    }      
+    } 
 })
+
+// Add three drink on top to database
+for (let i = 0; i < seeds.length; i++){
+    Tea.create({
+        name: seeds[i].name,
+        price: seeds[i].price
+    }, (err, new_data) => {
+        if (err){
+            console.log(err)
+        } 
+    })
+}
 // =================================================
 
 // Landing page
@@ -39,6 +62,17 @@ app.get('/', (req, res) => {
     res.render("index");
 })
 
+// Show all teas
+app.get('/teas', (req, res) => {
+    Tea.find({}, (err, teas) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(teas)
+            res.render("teas", {teas: teas})
+        }
+    })
+})
 
 
 app.listen(PORT, () => {
