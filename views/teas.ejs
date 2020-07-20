@@ -1,0 +1,13 @@
+<%- include("./partials/header") %>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <% for(i = 0; i < teas.length; i++){ %>
+                <h3><%= teas[i].name %> </h3>
+                <h3>$<%= teas[i].price %> </h3>
+            <% } %> 
+        </div>
+    </div>
+   
+</div>
+<%- include("./partials/footer") %>
