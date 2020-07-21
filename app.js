@@ -1,4 +1,5 @@
 const express = require("express"),
+      methodOverride = require("method-override"),
       mongoose = require("mongoose"),
       bodyParser = require("body-parser")
 
@@ -13,6 +14,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"))
 
 // Define TeaSchema
 const TeaSchema = new mongoose.Schema({
@@ -25,44 +27,6 @@ const TeaSchema = new mongoose.Schema({
 // Compile TeaSchema to make model
 const Tea = mongoose.model('Tea', TeaSchema);
 
-// ==================SEEDING DATA======================
-let seeds = [
-    {
-        name: 'Matcha Milk Tea',
-        image: "https://images.unsplash.com/photo-1561658286-ecb9fe9d8480?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-        description: "Innovative Matcha",
-        price: 4
-    },
-    {
-        name: 'Green Thai Milk Tea',
-        image: "https://images.unsplash.com/photo-1482349274213-19ca6126f02f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1190&q=80",
-        description: "Unmatched Thai cuisine",
-        price: 4
-    },
-]
-
-// Delete all existing data
-Tea.deleteMany({}, (err, deleted_data) => {
-    if (err){
-        console.log(err)
-    } 
-})
-
-// Add three drink on top to database
-for (let i = 0; i < seeds.length; i++){
-    Tea.create({
-        name: seeds[i].name,
-        image: seeds[i].image,
-        description: seeds[i].description,
-        price: seeds[i].price
-    }, (err, new_data) => {
-        if (err){
-            console.log(err)
-        } 
-    })
-}
-// =================================================
-
 // Landing page
 app.get('/', (req, res) => {
     res.render("index");
@@ -74,7 +38,6 @@ app.get('/teas', (req, res) => {
         if (err) {
             console.log(err)
         } else {
-            console.log(teas)
             res.render("teas", {teas: teas})
         }
     })
@@ -97,8 +60,15 @@ app.post('/teas', (req, res) => {
     res.redirect("/teas")
 })
 
-
-
+// DESTROY route
+app.delete('/teas/:id', (req, res) => {
+    Tea.findByIdAndDelete(req.params.id, (err) => {
+        if (err){
+            console.log(err)
+        }
+        res.redirect("/teas")
+    })
+})
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
