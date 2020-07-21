@@ -1,14 +1,18 @@
 <%- include("./partials/header") %>
 <div class="container">
     <div class="row">
-        <div class="col-4">
-            <% for(i = 0; i < teas.length; i++){ %>
-                <h3><%= teas[i].name %> </h3>
-                <img src=<%= teas[i].image%> alt="">
-                <h3><%= teas[i].description %> </h3>
-                <h3>$<%= teas[i].price %> </h3>
-            <% } %> 
-        </div>
+        <% teas.forEach(tea => { %>
+            <div class="col-4">
+                <h3><%= tea.name %> </h3>
+                <img class="img-fluid" src=<%= tea.image%> alt="">
+                <h3><%= tea.description %> </h3>
+                <h3>$<%= tea.price %> </h3>
+                <form action="/teas/<%= tea._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% }) %> 
+            
     </div>
    
 </div>
