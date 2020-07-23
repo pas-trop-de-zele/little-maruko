@@ -1,7 +1,8 @@
 const express = require("express"),
       methodOverride = require("method-override"),
       mongoose = require("mongoose"),
-      bodyParser = require("body-parser")
+      bodyParser = require("body-parser"),
+      Tea = require("./models/teas")
 
 // Set up mongoose connection
 mongoose.connect("mongodb://localhost/LittleMaruko", { useNewUrlParser: true, useUnifiedTopology: true});
@@ -15,17 +16,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"))
-
-// Define TeaSchema
-const TeaSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String,
-    price: Number
-});
-
-// Compile TeaSchema to make model
-const Tea = mongoose.model('Tea', TeaSchema);
 
 // Landing page
 app.get('/', (req, res) => {
