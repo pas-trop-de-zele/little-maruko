@@ -2,6 +2,7 @@ const express = require("express"),
       methodOverride = require("method-override"),
       mongoose = require("mongoose"),
       bodyParser = require("body-parser"),
+      session = require("express-session"),
       Tea = require("./models/teas")
 
 // Set up mongoose connection
@@ -12,6 +13,7 @@ const PORT = 3000
 
 // Misellaneous setup
 const app = express();
+app.use(session({secret: 'hs83kjgd83ks9201n5n22', resave: false, saveUninitialized: false}))
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -66,7 +68,7 @@ app.put("/teas/:id", (req, res) => {
 })
 
 // DESTROY route
-app.delete('/teas/:id', (req, res) => {
+app.delete("/teas/:id", (req, res) => {
     Tea.findByIdAndDelete(req.params.id, (err) => {
         if (err){
             console.log(err)
