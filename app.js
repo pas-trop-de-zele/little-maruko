@@ -77,6 +77,16 @@ app.delete("/teas/:id", (req, res) => {
     })
 })
 
+// sign in route
+app.get("/user/signin", (req, res) => {
+    res.render("user/signin")
+})
+
+// sign up route
+app.get("/user/signup", (req, res) => {
+    res.render("user/signup")
+})
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 })
