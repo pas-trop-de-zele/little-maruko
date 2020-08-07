@@ -27,12 +27,22 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  User
+                    <!-- Display name if user is sign in -->
+                    <% if (currentUser){ %>
+                        <%= currentUser.username %> 
+                    <% } else { %>
+                        User 
+                    <% } %>
                 </a>
+                
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/signin">Sign in</a>
-                  <a class="dropdown-item" href="/signout">Sign out</a>
-                  <a class="dropdown-item" href="/register">Register</a>
+                    <!-- Display sign in, sign out, register accordingly to whether user is signed in -->
+                    <% if (!currentUser) { %>
+                        <a class="dropdown-item" href="/signin">Sign in</a>
+                        <a class="dropdown-item" href="/register">Register</a>
+                    <% } else { %>
+                        <a class="dropdown-item" href="/signout">Sign out</a> 
+                    <% } %> 
                 </div>
             </li>
             <li class="nav-item">
