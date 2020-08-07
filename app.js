@@ -46,6 +46,12 @@ passport.use(new LocalStrategy(User.authenticate(User.authenticate())));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// use res.locals to check if a user is currently logged in
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
 // Importing routes
 const teas = require("./routes/tea"),
       auth = require("./routes/auth")
