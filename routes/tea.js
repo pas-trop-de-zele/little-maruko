@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Tea = require("../models/teas.js");
+const middleware = require("../middleware/middleware");
 
 // Landing page
 router.get('/', (req, res) => {
@@ -18,12 +19,12 @@ router.get('/teas', (req, res) => {
 })
 
 // NEW route: form to create nezw products
-router.get('/teas/new', (req, res) => {
+router.get('/teas/new', middleware.isLoggedin, (req, res) => {
     res.render("new")
 })
 
 // CREATE route: create new route from form info
-router.post('/teas', (req, res) => {
+router.post('/teas', middleware.isLoggedin, (req, res) => {
     Tea.create(req.body.tea, (err, newTea) => {
         if (err){
             console.log(err)
@@ -33,14 +34,14 @@ router.post('/teas', (req, res) => {
 })
 
 // EDIT route: edit current product
-router.get("/teas/:id/edit", (req, res) => {
+router.get("/teas/:id/edit", middleware.isLoggedin, (req, res) => {
     Tea.findById(req.params.id, (err, foundTea) => {
         res.render("edit", {tea: foundTea})
     })
 })
 
 // UPDATE route: update current product
-router.put("/teas/:id", (req, res) => {
+router.put("/teas/:id", middleware.isLoggedin, (req, res) => {
     Tea.findByIdAndUpdate(req.params.id, req.body.updatedTea, (err, updated_tea) => {
         if (err) {
             console.log(err)
@@ -50,7 +51,7 @@ router.put("/teas/:id", (req, res) => {
 })
 
 // DESTROY route
-router.delete("/teas/:id", (req, res) => {
+router.delete("/teas/:id", middleware.isLoggedin, (req, res) => {
     Tea.findByIdAndDelete(req.params.id, (err) => {
         if (err){
             console.log(err)
