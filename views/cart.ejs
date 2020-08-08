@@ -1,0 +1,19 @@
+<%- include("./partials/header") %>
+<div class="container">
+    
+    <% teasInCart.forEach((tea) => { %> 
+        <div class="row">
+            <div class="col-6">
+                <h1><%= tea.item.name %> </h1>
+                <img class="img-fluid" src=<%= tea.item.image%> alt="">
+                <h4>Price: <%= tea.item.price %> </h4>
+                <h4>Quantity: <%= tea.qty %> </h4>
+                <h4 class="mb-5">Total: <%= tea.price %> </h4>
+                <br>
+            </div>
+        </div>
+    <% }) %> 
+
+    <h3>Total price: <%= cart.totalPrice %></h3>
+</div>
+<%- include("./partials/footer") %>
