@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Tea = require("../models/teas.js");
 const middleware = require("../middleware/middleware");
+const Cart = require('../models/cart.js');
 
 // Landing page
 router.get('/', (req, res) => {
@@ -58,6 +59,34 @@ router.delete("/teas/:id", middleware.isLoggedin, (req, res) => {
         }
         res.redirect("/teas")
     })
+})
+
+
+// Add to cart route
+router.get("/add-to-cart/:id", (req, res) => {
+    // Retrieve product id
+    let teaId = req.params.id;
+    let cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    // Find item in database through id
+    Tea.findById(teaId, (err, foundTea) => {
+        if (err){
+            console.log(err);
+        } else{
+            // Add item object to cart
+            cart.add(foundTea, teaId);
+            // Save cart to seesion
+            req.session.cart = cart;
+            res.redirect("/teas");
+        }
+    })
+})
+
+// View cart
+router.get('/show-cart', (req, res) => {
+    let cart = new Cart(req.session.cart ? req.session.cart : {});
+    let teasInCart = cart.generateProducts();
+    res.render("cart", {teasInCart : teasInCart, cart : cart});
 })
 
 module.exports = router;
