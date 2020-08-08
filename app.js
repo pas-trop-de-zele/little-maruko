@@ -5,6 +5,7 @@ const express = require("express"),
       passport = require("passport"),
       LocalStrategy = require("passport-local").Strategy,
       session = require("express-session"),
+      MongoStore = require("connect-mongo")(session);
       bodyParser = require("body-parser");
 
 // Importing models
@@ -35,6 +36,12 @@ app.use(methodOverride("_method"))
  */
 app.use(session({
     secret: "hkdlaf88345hkjdgf62sf",
+    // Use existing mongoose connection
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    // set cookie expiration time to 1 hour
+    cookie: {
+        maxAge: 1000 * 60 * 60
+    },
     resave: false,
     saveUninitialized: false
 }));
@@ -46,9 +53,11 @@ passport.use(new LocalStrategy(User.authenticate(User.authenticate())));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// use res.locals to check if a user is currently logged in
 app.use((req, res, next) => {
+    // currentUser to check whether are is a user logged in
     res.locals.currentUser = req.user;
+    // 
+    res.locals.session = req.session;
     next();
 })
 
