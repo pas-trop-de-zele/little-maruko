@@ -2,14 +2,14 @@
 <div class="container">
     <div class="row">
         <% teas.forEach(tea => { %>
-            <div class="col-4 p-0">
+            <div class="col-4 p-3">
                 <h3><%= tea.name %> </h3>
                 <img class="img-fluid" src=<%= tea.image%> alt="">
-                <h3><%= tea.description %> </h3>
+                <p><%= tea.description %></p>
                 
                 <div class="row justify-content-between">
                     <h3 class="ml-3">$<%= tea.price %> </h3>
-                    <a class="btn btn-success float-right mr-3" href="/add-to-cart">Add to cart</a>
+                    <a class="btn btn-success float-right mr-3" href="/add-to-cart/<%= tea._id %> ">Add to cart</a>
                 </div>
                 
                 <% if (currentUser) { %> 
