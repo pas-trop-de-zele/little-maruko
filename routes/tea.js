@@ -14,14 +14,14 @@ router.get('/teas', (req, res) => {
         if (err) {
             console.log(err)
         } else {
-            res.render("teas", {teas: teas})
+            res.render("teas/teas", {teas: teas})
         }
     })
 })
 
 // NEW route: form to create nezw products
 router.get('/teas/new', middleware.isLoggedin, (req, res) => {
-    res.render("new")
+    res.render("teas/new")
 })
 
 // CREATE route: create new route from form info
@@ -37,7 +37,7 @@ router.post('/teas', middleware.isLoggedin, (req, res) => {
 // EDIT route: edit current product
 router.get("/teas/:id/edit", middleware.isLoggedin, (req, res) => {
     Tea.findById(req.params.id, (err, foundTea) => {
-        res.render("edit", {tea: foundTea})
+        res.render("teas/edit", {tea: foundTea})
     })
 })
 
@@ -86,7 +86,7 @@ router.get("/add-to-cart/:id", (req, res) => {
 router.get('/show-cart', (req, res) => {
     let cart = new Cart(req.session.cart ? req.session.cart : {});
     let teasInCart = cart.generateProducts();
-    res.render("cart", {teasInCart : teasInCart, cart : cart});
+    res.render("cart/cart", {teasInCart : teasInCart, cart : cart});''
 })
 
 module.exports = router;
