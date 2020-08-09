@@ -1,13 +1,16 @@
+const smtp = require("../credentials/smtp");
+
 const router = require("express").Router(),
-      nodemailer = require("nodemailer");
+      nodemailer = require("nodemailer"),
+      smtpCredentials = require("../credentials/smtp");
 
 // transport object
 const mailman = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     auth: {
-        user: "gulagman4157@gmail.com",
-        pass: "qcf4me!!"
+        user: smtpCredentials.user,
+        pass: smtpCredentials.pass
     }
 })
 
