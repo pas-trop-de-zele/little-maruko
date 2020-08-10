@@ -2,14 +2,18 @@
 <div class="container">
     
     <% teasInCart.forEach((tea) => { %> 
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-6">
                 <h1><%= tea.item.name %> </h1>
                 <img class="img-fluid" src=<%= tea.item.image%> alt="">
                 <h4>Price: <%= tea.item.price %> </h4>
-                <h4>Quantity: <%= tea.qty %> </h4>
-                <h4 class="mb-5">Total: <%= tea.price %> </h4>
-                <br>
+                <h4>Quantity: <input type="number" value="<%= tea.qty %>"></h4>
+                <div class="row mb-4">
+                    <div class="col - 6">
+                        <h4>Total: <%= tea.price %></h4>
+                        <a href="/cart/<%= tea.item._id %>">Remove items</a>
+                    </div>
+                </div>
             </div>
         </div>
     <% }) %> 
