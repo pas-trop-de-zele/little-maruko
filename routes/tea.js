@@ -83,10 +83,19 @@ router.get("/add-to-cart/:id", (req, res) => {
 })
 
 // View cart
-router.get('/show-cart', (req, res) => {
+router.get("/show-cart", (req, res) => {
+    // Use existing cart in session if there is one otherwise use blank one
     let cart = new Cart(req.session.cart ? req.session.cart : {});
     let teasInCart = cart.generateProducts();
-    res.render("cart/cart", {teasInCart : teasInCart, cart : cart});''
+    res.render("cart/cart", {teasInCart : teasInCart, cart : cart});
+})
+
+// remove item off cart
+router.get("/cart/:id", (req, res) => {
+    let cart = new Cart(req.session.cart);
+    cart.remove(req.params.id);
+    req.session.cart = cart;
+    res.redirect("/show-cart");
 })
 
 module.exports = router;
