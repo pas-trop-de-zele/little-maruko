@@ -27,6 +27,12 @@ body {
     padding: 20px;
 }
 
+#cart-counter {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0 4px;
+    vertical-align: top;
+}
 
 /* body {
     height: 100%;
