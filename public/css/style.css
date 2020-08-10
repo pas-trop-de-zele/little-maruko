@@ -2,6 +2,32 @@ html {
     height: 100%;
 }
 
+body {
+    height: 100%;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#landingVideo {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    text-align: center;
+    position: fixed;
+    bottom: 43%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
+
+
 /* body {
     height: 100%;
     background-image: url("https://images.unsplash.com/photo-1567475822164-68e950e8b1cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80");
