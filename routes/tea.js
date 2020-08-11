@@ -98,4 +98,12 @@ router.get("/cart/:id", (req, res) => {
     res.redirect("/show-cart");
 })
 
+// update item quantity in cart
+router.post("/cart/:id/updatequantity", (req, res) => {
+    let cart = new Cart(req.session.cart);
+    cart.updateQuantity(req.params.id, req.body.newQuantity);
+    req.session.cart = cart;
+    res.redirect("/show-cart");
+})
+
 module.exports = router;
