@@ -2,18 +2,25 @@
 <div class="container">
     
     <% teasInCart.forEach((tea) => { %> 
-        <div class="row mb-2">
+        <div class="row mt-5 mb-2">
             <div class="col-6">
-                <h1><%= tea.item.name %> </h1>
-                <img class="img-fluid" src=<%= tea.item.image%> alt="">
+                <h3><%= tea.item.name %> </h3>
                 <h4>Price: <%= tea.item.price %> </h4>
-                <h4>Quantity: <input type="number" value="<%= tea.qty %>"></h4>
+
+                <form action="/cart/<%= tea.item._id %>/updatequantity" method="POST">
+                    <h4>Quantity: <input type="number" name="newQuantity" value="<%= tea.qty %>"></h4>
+                    <button class="btn btn-link pl-0" type="submit">Update Quantity</button>
+                </form>
+
                 <div class="row mb-4">
                     <div class="col - 6">
                         <h4>Total: <%= tea.price %></h4>
                         <a href="/cart/<%= tea.item._id %>">Remove items</a>
                     </div>
                 </div>
+            </div>
+            <div class="col-3">
+                <img class="img-fluid" src=<%= tea.item.image%>>
             </div>
         </div>
     <% }) %> 
