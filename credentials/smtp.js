@@ -1,6 +1,8 @@
 const smtp = {
-    user: "gulagman4157@gmail.com",
-    pass: "qcf4me!!"
+    user: "little-maruko@outlook.com",
+    pass: "qcf4me!!",
+    host: "smtp-mail.outlook.com",
+    port: 25
 }
 
 module.exports = smtp;
