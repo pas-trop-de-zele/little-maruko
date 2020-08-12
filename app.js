@@ -20,7 +20,7 @@ mongoose.connect("mongodb://localhost/LittleMaruko", {
 });
 
 // port to run server on
-const PORT = 3000
+const PORT = process.env.PORT || 3000;
 
 // Misellaneous setup
 const app = express();
