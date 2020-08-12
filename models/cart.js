@@ -51,6 +51,12 @@ class Cart {
         }
         return products;
     }
+    
+    clearAll() {
+        this.items = {}
+        this.totalQuantity  = 0;
+        this.totalPrice = 0;
+    }
 }
 
 module.exports = Cart;
