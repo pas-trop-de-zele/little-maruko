@@ -56,7 +56,7 @@ router.post('/contact', (req, res) => {
             return console.log(err);
         }
         console.log(`Send customer message to ${info.messageId}`)
-        res.redirect("/teas");
+        res.render("contact/contactDone");
     })
 })
 

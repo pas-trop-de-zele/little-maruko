@@ -46,7 +46,7 @@ router.post('/checkout', (req, res) => {
             return console.log(err);
         }
         console.log(`Send order to ${info.messageId}`)
-        res.redirect("/teas");
+        res.render("cart/checkoutDone");
     })
 })
 
