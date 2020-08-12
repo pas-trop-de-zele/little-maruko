@@ -1,6 +1,19 @@
+const { createTestAccount } = require("nodemailer");
+
 const router = require("express").Router(),
       Tea = require("../models/teas"),
       Cart = require("../models/cart");
+
+// Check out
+router.get("/cart/billing", (req, res) => {
+    let cart = new Cart(req.session.cart);
+    let teasInCart = cart.generateProducts();
+    res.render("cart/billing", {teasInCart : teasInCart, cart : cart});
+})
+
+router.post("/cart/checkout", (req, res) => {
+    res.send("Checkout");
+})
 
 // Add to cart route
 router.get("/add-to-cart/:id", (req, res) => {
