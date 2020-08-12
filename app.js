@@ -64,12 +64,16 @@ app.use((req, res, next) => {
 // Importing routes
 const teas = require("./routes/tea"),
       auth = require("./routes/auth"),
-      contact = require("./routes/contact");
+      contact = require("./routes/contact"),
+      cart = require("./routes/cart"),
+      checkout = require("./routes/checkout");
 
 // Importing routes
 app.use(teas);
 app.use(auth);
-app.use(contact);
+app.use(contact),
+app.use(cart),
+app.use(checkout);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
