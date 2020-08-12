@@ -13,7 +13,7 @@ const User = require("./models/user.js");
 
 
 // Set up mongoose connection
-mongoose.connect("mongodb://localhost/LittleMaruko", { 
+mongoose.connect("mongodb+srv://sam:qcf4me!!@little-maruko.4icjd.mongodb.net/<dbname>?retryWrites=true&w=majority", { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex: true
