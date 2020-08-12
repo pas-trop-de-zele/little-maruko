@@ -4,17 +4,21 @@
     <% teasInCart.forEach((tea) => { %> 
         <div class="row mt-5 mb-2">
             <div class="col-6">
-                <h3><%= tea.item.name %> </h3>
-                <h4>Price: <%= tea.item.price %> </h4>
-
-                <form action="/cart/<%= tea.item._id %>/updatequantity" method="POST">
-                    <h4>Quantity: <input type="number" name="newQuantity" value="<%= tea.qty %>"></h4>
-                    <button class="btn btn-link pl-0" type="submit">Update Quantity</button>
-                </form>
+                <h4><%= tea.item.name %></h4>
+                <h6 class="text-muted">Price: $<%= tea.item.price %></h6>
+                <div class="row">
+                    <div class="col">
+                        <form action="/cart/<%= tea.item._id %>/updatequantity" method="POST">
+                            <h6 class="text-muted">Quantity: <input class="p-0" type="number" name="newQuantity" value="<%= tea.qty %>" min="1" max="50"></h6>
+                            <button class="py-0 btn btn-link pl-0" type="submit">Update Quantity</button>
+                        </form>
+                    </div>
+                </div>
+                
 
                 <div class="row mb-4">
                     <div class="col - 6">
-                        <h4>Total: <%= tea.price %></h4>
+                        <h4 class="my-0" >Total: $<%= tea.price %></h4>
                         <a href="/cart/<%= tea.item._id %>">Remove items</a>
                     </div>
                 </div>
@@ -25,6 +29,12 @@
         </div>
     <% }) %> 
 
-    <h3>Total price: <%= cart.totalPrice %></h3>
+    <% if (cart.totalQuantity == 0) { %> 
+        <h3>Cart is empty</h3>
+    <% } else { %> 
+        <h3>Total price: $<%= cart.totalPrice %></h3>
+        <a class="btn btn-primary mb-5" href="/cart/billing">Check out</a>
+    <% } %> 
+    
 </div>
 <%- include("../partials/footer") %>
