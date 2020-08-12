@@ -5,8 +5,8 @@ const router = require("express").Router(),
 
 // transport object
 const mailman = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
+    host: smtpCredentials.host,
+    port: smtpCredentials.port,
     auth: {
         user: smtpCredentials.user,
         pass: smtpCredentials.pass
@@ -36,8 +36,8 @@ router.post('/checkout', (req, res) => {
     cart.clearAll();
     req.session.cart = cart;
     const mail = {
-        from: "gulagman4157@gmail.com",
-        to: "gulagman4157@gmail.com",
+        from: smtpCredentials.user,
+        to: smtpCredentials.user,
         subject: `NEW ORDER from  ${req.body.name}`,
         html: order
     }

@@ -6,8 +6,8 @@ const router = require("express").Router(),
 
 // transport object
 const mailman = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
+    host: smtpCredentials.host,
+    port: smtpCredentials.port,
     auth: {
         user: smtpCredentials.user,
         pass: smtpCredentials.pass
@@ -22,8 +22,8 @@ router.get('/contact/new', (req, res) => {
 
 router.post('/contact', (req, res) => {
     const mail = {
-        from: "gulagman4157@gmail.com",
-        to: "gulagman4157@gmail.com",
+        from: smtpCredentials.user,
+        to: smtpCredentials.user,
         subject: `Message from customer - ${req.body.name}`,
         html: `
         <h1 class="display-5 text-center mt-5">Message from ${req.body.name}</h1>
