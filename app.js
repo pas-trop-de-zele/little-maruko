@@ -66,14 +66,16 @@ const teas = require("./routes/tea"),
       auth = require("./routes/auth"),
       contact = require("./routes/contact"),
       cart = require("./routes/cart"),
-      checkout = require("./routes/checkout");
+      checkout = require("./routes/checkout"),
+      dashboard = require("./routes/dashboard");
 
 // Importing routes
 app.use(teas);
 app.use(auth);
-app.use(contact),
-app.use(cart),
+app.use(contact);
+app.use(cart);
 app.use(checkout);
+app.use(dashboard);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
