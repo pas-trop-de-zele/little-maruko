@@ -1,5 +1,3 @@
-const { createTestAccount } = require("nodemailer");
-
 const router = require("express").Router(),
       Tea = require("../models/teas"),
       Cart = require("../models/cart");
