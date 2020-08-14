@@ -19,13 +19,23 @@ router.get("/dashboard", (req, res) => {
 // Confirm order is received
 router.post("/dashboard/confirm", (req, res) => {
     mailman.messageConfirmReceived(req.body.name, req.body.phone);
-    res.redirect("/dashboard")
+    Order.findByIdAndUpdate(req.body.id, {received: true}, (err, result) => {
+        if (err) {
+            return console.log(err);
+        }
+        res.redirect("/dashboard")
+    })
 })
 
 // Confirm order is ready for pick up
 router.post("/dashboard/ready", (req, res) => {
     mailman.messasgeReadyToPickUp(req.body.name, req.body.phone);
-    res.redirect("/dashboard")
+    Order.findByIdAndUpdate(req.body.id, {ready: true}, (err, result) => {
+        if (err) {
+            return console.log(err);
+        }
+        res.redirect("/dashboard")
+    })
 })
 
 router.delete("/dashboard/:id", (req, res) => {
