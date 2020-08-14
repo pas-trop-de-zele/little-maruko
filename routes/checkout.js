@@ -13,7 +13,10 @@ router.post("/checkout", (req, res) => {
         phone: req.body.phone,
         date: req.body.date,
         time: req.body.time,
-        total: cart.totalPrice
+        total: cart.totalPrice,
+        // Set received and ready to false to change later in dashboard
+        received: false,
+        ready: false
     }, (err, newOrder) => {
         if (err) {
             return console.log(err);
