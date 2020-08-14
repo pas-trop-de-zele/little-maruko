@@ -1,14 +1,9 @@
 html {
-    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
 }
 
-body {
-    height: 100%;
-    margin: 0px;
-    overflow: hidden;
-}
-
-#landingVideo {
+/* #landingVideo {
     position: absolute;
     min-width: 100%;
     min-height: 100%;
@@ -25,7 +20,7 @@ body {
     color: #f1f1f1;
     width: 100%;
     padding: 20px;
-}
+} */
 
 #cart-counter {
     font-size: 15px;
@@ -34,11 +29,17 @@ body {
     vertical-align: top;
 }
 
-/* body {
+body {
     height: 100%;
-    background-image: url("https://images.unsplash.com/photo-1567475822164-68e950e8b1cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80");
+    background-image: url("../picture/landingPage.png");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-} */
+    background-position: center;
+}
+
+#checkUsOut {
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+}
 
