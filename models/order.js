@@ -7,7 +7,9 @@ const OrderSchema = new mongoose.Schema({
     phone: Number,
     date: Date,
     time: String,
-    total: Number
+    total: Number,
+    received: Boolean,
+    ready: Boolean
 })
 
 module.exports = mongoose.model("order", OrderSchema);
