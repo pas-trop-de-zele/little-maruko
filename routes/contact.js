@@ -1,16 +1,14 @@
-const smtp = require("../credentials/smtp");
-
+// @ts-nocheck
 const router = require("express").Router(),
-      nodemailer = require("nodemailer"),
-      smtpCredentials = require("../credentials/smtp");
+      nodemailer = require("nodemailer");
 
 // transport object
 const mailman = nodemailer.createTransport({
-    host: smtpCredentials.host,
-    port: smtpCredentials.port,
+    host: process.env.HOST,
+    port: process.env.STMPPORT,
     auth: {
-        user: smtpCredentials.user,
-        pass: smtpCredentials.pass
+        user: process.env.USER,
+        pass: process.env.PASS
     }
 })
 
@@ -22,8 +20,8 @@ router.get('/contact/new', (req, res) => {
 
 router.post('/contact', (req, res) => {
     const mail = {
-        from: smtpCredentials.user,
-        to: smtpCredentials.user,
+        from: process.env.USER,
+        to: process.env.USER,
         subject: `Message from customer - ${req.body.name}`,
         html: `
         <h1 class="display-5 text-center mt-5">Message from ${req.body.name}</h1>
