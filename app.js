@@ -6,14 +6,15 @@ const express = require("express"),
       LocalStrategy = require("passport-local").Strategy,
       session = require("express-session"),
       MongoStore = require("connect-mongo")(session);
-      bodyParser = require("body-parser");
+      bodyParser = require("body-parser"),
+      dotEnv = require('dotenv').config();
 
 // Importing models
 const User = require("./models/user.js");
 
 
 // Set up mongoose connection
-mongoose.connect("mongodb+srv://sam:qcf4me!!@little-maruko.4icjd.mongodb.net/<dbname>?retryWrites=true&w=majority", { 
+mongoose.connect(process.env.MONGOOSECONNECTIONSTRING, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -35,7 +36,7 @@ app.use(methodOverride("_method"))
  * Session data is save on server side
  */
 app.use(session({
-    secret: "hkdlaf88345hkjdgf62sf",
+    secret: process.env.SESSIONSECRET,
     // Use existing mongoose connection
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     // set cookie expiration time to 1 hour
