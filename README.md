@@ -1,5 +1,5 @@
 # Little-Maruko
-Food ordering webapp
+Restaurant webapp, node express backend with Twilio API for order notification
 
 ## Setup
 + Make sure you have **NodeJS** install
