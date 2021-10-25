@@ -31,7 +31,7 @@ PORT=3000
 
 ACCOUNTSID=<from twillio>
 AUTHTOKEN=<from twillio>
-PHONE=+<from twillio>
+PHONE=+<from twillio(including area code)>
 
 USER=<outlook email> => this will be where you recevied user feedback
 PASS=<outlook password>
