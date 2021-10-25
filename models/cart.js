@@ -1,5 +1,5 @@
 class Cart {
-    constructor (cart){
+    constructor(cart) {
         // If cart object not exist yet will default to 0
         this.items = cart.items || {};
         // If totalQuantity not exist yet will default to 0
@@ -13,13 +13,12 @@ class Cart {
         let addItem = this.items[id];
         // Check if item already exist
         if (!addItem) {
-            addItem = this.items[id] = {item: item, qty: 0, price: 0}
+            addItem = this.items[id] = { item: item, qty: 0, price: 0 };
         }
         this.items[id].qty++;
         this.totalPrice += this.items[id].item.price;
         this.items[id].price = this.items[id].item.price * this.items[id].qty;
         this.totalQuantity++;
-        
     }
 
     remove(id) {
@@ -33,12 +32,12 @@ class Cart {
         let changeInQuantity = selectItem.qty - newQuantity;
         // Update the item quantity
         selectItem.qty = newQuantity;
-        
+
         let newPrice = newQuantity * selectItem.item.price;
         let changeInPrice = selectItem.price - newPrice;
         // Update the item price
         selectItem.price -= changeInPrice;
-        
+
         this.totalQuantity -= changeInQuantity;
         this.totalPrice -= changeInPrice;
     }
@@ -51,10 +50,10 @@ class Cart {
         }
         return products;
     }
-    
+
     clearAll() {
-        this.items = {}
-        this.totalQuantity  = 0;
+        this.items = {};
+        this.totalQuantity = 0;
         this.totalPrice = 0;
     }
 }
