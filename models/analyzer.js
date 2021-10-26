@@ -1,4 +1,4 @@
-const PastData = require("./pastdata");
+const Tea = require("./teas");
 
 class Analyzer {
     constructor(order) {
@@ -6,28 +6,14 @@ class Analyzer {
     }
 
     store_ordered_items() {
-        let ordered_items = this.extract_items();
-        ordered_items.forEach((ordered_product) => {
-            PastData.count(
-                { _id: ordered_product.item._id },
-                function (err, count) {
-                    if (count == 0) {
-                        PastData.create({
-                            // _id: ordered_product.item._id,
-                            orderedItem: ordered_product.item.name,
-                            orderedQuantity: ordered_product.qty,
-                            itemId: ordered_product.item._id,
-                        });
-                    } else {
-                        PastData.findByIdAndUpdate(
-                            ordered_product.item._id,
-                            { $inc: { orderedQuantity: ordered_product.qty } },
-                            (err, updated_ordered_product) => {
-                                if (err) {
-                                    console.log(err);
-                                }
-                            }
-                        );
+        let ordered_teas = this.extract_items();
+        ordered_teas.forEach((ordered_tea) => {
+            Tea.findByIdAndUpdate(
+                ordered_tea.item._id,
+                { $inc: { orderCount: ordered_tea.qty } },
+                (err, updated_ordered_tea) => {
+                    if (err) {
+                        console.log(err);
                     }
                 }
             );
